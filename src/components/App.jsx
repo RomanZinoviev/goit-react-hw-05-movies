@@ -1,4 +1,13 @@
+import { useState } from "react";
+import { HomePage } from "./HomePage/HomePage";
+import { MoviesPage } from "./MoviesPage/MoviesPage";
+import { MovieDetailsPage } from "./MovieDetailsPage/MovieDetailsPage";
+
 export const App = () => {
+  const [movieId, setMovieId] = useState(null);
+  const setMovieIdHandler = (id) => {
+    setMovieId(id)
+  };    
   return (
     <div
       style={{
@@ -11,7 +20,9 @@ export const App = () => {
         color: '#010101',
       }}
     >
-      React homework template
+      <HomePage onSubmit={setMovieIdHandler}/>
+      <MoviesPage onSubmit={setMovieIdHandler} />
+     { movieId&&<MovieDetailsPage movieId={movieId}/>}
     </div>
   );
 };
