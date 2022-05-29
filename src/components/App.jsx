@@ -1,13 +1,16 @@
-import { useState } from "react";
-import { HomePage } from "./HomePage/HomePage";
-import { MoviesPage } from "./MoviesPage/MoviesPage";
-import { MovieDetailsPage } from "./MovieDetailsPage/MovieDetailsPage";
+import { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { HomePage } from './HomePage/HomePage';
+import { MoviesPage } from './MoviesPage/MoviesPage';
+import { MovieDetailsPage } from './MovieDetailsPage/MovieDetailsPage';
+import { Navigation } from './Navigation/Navigation';
+import { NotFoundViue } from './NotFoundViue/NotFoundViue';
 
 export const App = () => {
   const [movieId, setMovieId] = useState(null);
-  const setMovieIdHandler = (id) => {
-    setMovieId(id)
-  };    
+  const setMovieIdHandler = id => {
+    setMovieId(id);
+  };
   return (
     <div
       style={{
@@ -20,9 +23,19 @@ export const App = () => {
         color: '#010101',
       }}
     >
-      <HomePage onSubmit={setMovieIdHandler}/>
-      <MoviesPage onSubmit={setMovieIdHandler} />
-     { movieId&&<MovieDetailsPage movieId={movieId}/>}
+      <Navigation />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/movies"
+          element={<MoviesPage onSubmit={setMovieIdHandler} />}
+        />
+        <Route
+          path="/movies/:movieId"
+          element={<MovieDetailsPage movieId={movieId} />}
+        />
+        <Route element={<NotFoundViue />} />
+      </Routes>
     </div>
   );
 };

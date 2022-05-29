@@ -1,0 +1,8 @@
+.link{
+    margin-right: 20px;
+    font-size: 30px;
+    text-decoration: none;
+}
+.activLink{
+    color: blue;
+}
