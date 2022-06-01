@@ -1,15 +1,16 @@
-import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import s from "../MoviesPage/MoviesPage.module.css"
 
-export const MoviesPage = ({onSubmit}) => {
+export const MoviesPage = () => {
     const [films, setFilms] = useState(null);
     const [value, setValue] = useState("");
+    const navigate = useNavigate();
 
     const API_GET = "https://api.themoviedb.org/3/search/movie";
     const API_KEY = "04e9412e8b51c89a88481cdeb7f8adec";
-    const wayImage = "https://image.tmdb.org/t/p/w500";
+    
     const getFilms = (film) => {
         axios.get(`${API_GET}?api_key=${API_KEY}&query=${film}`).then(res => {            
             const { results } = res.data;             
@@ -18,26 +19,20 @@ export const MoviesPage = ({onSubmit}) => {
     };
     const submitHandler = (e) => {
         e.preventDefault();
-        getFilms(value);
-        // onSabmit(value);
+        getFilms(value);        
     };
     const inputChange = (e) => {
         setValue(e.target.value)
     };
-    // useEffect(() => {
-    //     if (!films) { return };
-    //     getFilms(value);
-    // }, [films]);
-    const getFilmId = (e) => {
-        const filmId=e.currentTarget.value;
-        onSubmit(filmId)
+    const homeHandle = () => {
+        navigate(-1);
     };
+    
     return (
         <><form className={s.form}>
             <button type="submit" className={s.button} onClick={submitHandler}>
                 <span className={s.buttonLabel}>Search</span>
             </button>
-
             <input
                 className={s.input}
                 type="text"
@@ -47,9 +42,10 @@ export const MoviesPage = ({onSubmit}) => {
                 autoFocus
                 placeholder="Search films" />
         </form>
+            <button onClick={homeHandle}></button>
             <ul >
                 {films&&films.map(({ id, title }) => {
-                    return (<li key={id} onClick={getFilmId} value={id}><Link to={`/movie/${id}`}>{title}</Link></li>);
+                    return (<li key={id} ><Link to={`/movie/${id}`}>{title}</Link></li>);
                 })}
             </ul></>
     )

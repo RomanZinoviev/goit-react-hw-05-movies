@@ -8,13 +8,7 @@ export const Navigation = () => (
     </NavLink>
     <NavLink className={s.link} to="/movies">
       Find
-    </NavLink>
-    <NavLink
-      className={s.link}
-      to="/movie/:movieId"
-    >
-      Movie Details
-    </NavLink>
+    </NavLink>    
   </nav>
     <Outlet />
   </>

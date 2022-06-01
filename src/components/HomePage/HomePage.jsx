@@ -14,17 +14,17 @@ export const HomePage = ({onSubmit}) => {
             setPopFilms(results);
         }).catch(err => console.log(err))
     };
-    const getFilmId = (e) => {
-        const filmId=e.currentTarget.value;
-        onSubmit(filmId)
-    };
+    // const getFilmId = (e) => {
+    //     const filmId=e.currentTarget.value;
+    //     onSubmit(filmId)
+    // };
     useEffect(() => {
         getFilms()
     }, []);
     return (
         <ul>
             {popFilms.map(({ id, title}) => {
-                return(<li key={id} onClick={getFilmId} value={id}><Link to={`/movie/${id}`}>{title}</Link></li>)
+                return(<li key={id} ><Link to={`/movie/${id}`}>{title}</Link></li>)
             })}
         </ul>
     )
