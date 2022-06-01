@@ -13,5 +13,13 @@ export const Cast = ({ movieId }) => {
             setCast(res.data);            
         }).catch(err => console.log(err))
     };
-    getCast(movieId);
+    useEffect(() => {
+        if(!movieId){return}
+        getCast(movieId);
+    }, [movieId]);
+    if (cast) {
+        return (
+            <p>ok</p>
+        )
+    }
 };

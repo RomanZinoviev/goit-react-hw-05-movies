@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export const Cast = ({ movieId }) => {    
+export const Reviews = ({ movieId }) => {    
     const [reviews, setReviews] = useState(null);    
 
     const API_GET = "https://api.themoviedb.org/3/movie/";

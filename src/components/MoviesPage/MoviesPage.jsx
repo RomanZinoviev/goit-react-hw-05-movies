@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import s from "../MoviesPage/MoviesPage.module.css"
 
@@ -47,8 +48,8 @@ export const MoviesPage = ({onSubmit}) => {
                 placeholder="Search films" />
         </form>
             <ul >
-                {films&&films.map(({ id, title, overview, poster_path }) => {
-                    return (<li key={id} onClick={getFilmId} value={id}><p>{title}</p><img src={`${wayImage}${poster_path}`} alt={title} /><p>{overview}</p></li>);
+                {films&&films.map(({ id, title }) => {
+                    return (<li key={id} onClick={getFilmId} value={id}><Link to={`/movie/${id}`}>{title}</Link></li>);
                 })}
             </ul></>
     )
