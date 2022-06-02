@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import s from "../HomePage/HomePage.module.css"
 
-export const HomePage = ({onSubmit}) => {
+ const HomePage = ({onSubmit}) => {
     const [popFilms, setPopFilms] = useState([]);
     const API_GET = "https://api.themoviedb.org/3/trending/";
     const API_KEY = "04e9412e8b51c89a88481cdeb7f8adec";   
@@ -26,3 +26,4 @@ export const HomePage = ({onSubmit}) => {
         </ul>
     )
 };
+export default HomePage;

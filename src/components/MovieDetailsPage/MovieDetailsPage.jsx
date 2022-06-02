@@ -1,11 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import axios from "axios";
 import { Link, useNavigate, Route, Routes, useParams } from "react-router-dom";
-import { Cast } from '../Cast/Cast';
-import { Reviews } from '../Reviews/Reviews';
+// import { Cast } from '../Cast/Cast';
+// import { Reviews } from '../Reviews/Reviews';
 import s from "../MovieDetailsPage/MovieDetailsPage.module.css"
+const Cast = lazy(() => import("../Cast/Cast"));
+const Reviews = lazy(() => import("../Reviews/Reviews"))
 
-export const MovieDetailsPage = () => {
+const MovieDetailsPage = () => {
     const [movieInfo, setMovieInfo] = useState(null);  
     const navigate = useNavigate();
     const {movieId} = useParams();
@@ -45,11 +47,14 @@ export const MovieDetailsPage = () => {
                 <Link to={`reviews`} className={s.link}>Reviews</Link>
               </li>
             </ul>
-            <Routes>
+            <Suspense fallback={<>Loading...</>}>
+              <Routes>
               <Route path={`cast`} element={<Cast />} />
               <Route path={`reviews`} element={<Reviews />} />
             </Routes>
+            </Suspense>
           </div>
         );
     }
 };
+export default MovieDetailsPage;

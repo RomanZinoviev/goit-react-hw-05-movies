@@ -1,9 +1,15 @@
 import { Route, Routes } from 'react-router-dom';
-import { HomePage } from './HomePage/HomePage';
-import { MoviesPage } from './MoviesPage/MoviesPage';
-import { MovieDetailsPage } from './MovieDetailsPage/MovieDetailsPage';
-import { Navigation } from './Navigation/Navigation';
-import { NotFoundViue } from './NotFoundViue/NotFoundViue';
+import { lazy, Suspense } from 'react';
+// import { HomePage } from './HomePage/HomePage';
+// import { MoviesPage } from './MoviesPage/MoviesPage';
+// import { MovieDetailsPage } from './MovieDetailsPage/MovieDetailsPage';
+//  import { Navigation } from './Navigation/Navigation';
+// import { NotFoundViue } from './NotFoundViue/NotFoundViue';
+const HomePage = lazy(() => import("./HomePage/HomePage"));
+const MoviesPage = lazy(() => import("./MoviesPage/MoviesPage"));
+const MovieDetailsPage = lazy(() => import("./MovieDetailsPage/MovieDetailsPage"));
+ const Navigation = lazy(() => import("./Navigation/Navigation"));
+const NotFoundViue = lazy(() => import("./NotFoundViue/NotFoundViue"));
 
 export const App = () => {  
   return (
@@ -13,8 +19,9 @@ export const App = () => {
       paddingRight: 50,
       paddingTop: 50,       
       }}
->
-      <Routes>
+    >      
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<HomePage />} />
           <Route path="movies" element={<MoviesPage />} />
@@ -22,6 +29,7 @@ export const App = () => {
           <Route path="*" element={<NotFoundViue />} />
         </Route>
       </Routes>
+      </Suspense>
     </div>
   );
 };
