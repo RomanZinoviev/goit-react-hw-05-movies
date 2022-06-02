@@ -2,7 +2,7 @@ import { NavLink, Outlet} from 'react-router-dom';
 import s from '../Navigation/Navigation.module.css';
 
 export const Navigation = () => (
-  <><nav>
+  <><nav className={s.navigate}>
     <NavLink className={s.link} to="/">
       Home
     </NavLink>

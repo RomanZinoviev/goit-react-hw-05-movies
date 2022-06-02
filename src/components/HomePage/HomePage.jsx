@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import s from "../HomePage/HomePage.module.css"
 
 export const HomePage = ({onSubmit}) => {
     const [popFilms, setPopFilms] = useState([]);
@@ -18,9 +19,9 @@ export const HomePage = ({onSubmit}) => {
         getFilms()
     }, []);
     return (
-        <ul>
+        <ul className={s.list}>
             {popFilms.map(({ id, title}) => {
-                return(<li key={id} ><Link to={`/movie/${id}`}>{title}</Link></li>)
+                return(<li key={id} className={s.link} ><Link to={`/movie/${id}`}>{title}</Link></li>)
             })}
         </ul>
     )

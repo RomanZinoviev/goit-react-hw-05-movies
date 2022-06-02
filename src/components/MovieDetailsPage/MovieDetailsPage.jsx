@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useNavigate, Route, Routes, useParams } from "react-router-dom";
 import { Cast } from '../Cast/Cast';
 import { Reviews } from '../Reviews/Reviews';
+import s from "../MovieDetailsPage/MovieDetailsPage.module.css"
 
 export const MovieDetailsPage = () => {
     const [movieInfo, setMovieInfo] = useState(null);  
@@ -29,19 +30,19 @@ export const MovieDetailsPage = () => {
     if (movieInfo) {
         return (
           <div>
-            <p> {movieInfo.original_title}</p>
-            <p>{movieInfo.overview}</p>
+            <button onClick={goBackHandle} className={s.button}>Go back</button>
+            <p>Original name:  {movieInfo.original_title}</p>
+            <p>About: {movieInfo.overview}</p>
             <img
               src={`${wayImage}${movieInfo.poster_path}`}
               alt={movieInfo.original_title}
-                />
-                <button onClick={goBackHandle}>Go back</button>
+                />                
             <ul>
               <li>
-                <Link to={`cast`}>Cast</Link>
+                <Link to={`cast`} className={s.link}>Cast</Link>
               </li>
               <li>
-                <Link to={`reviews`}>Reviews</Link>
+                <Link to={`reviews`} className={s.link}>Reviews</Link>
               </li>
             </ul>
             <Routes>

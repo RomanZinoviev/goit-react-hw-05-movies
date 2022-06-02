@@ -29,7 +29,9 @@ export const MoviesPage = () => {
     };
     
     return (
-        <><form className={s.form}>
+        <>
+            <button onClick={homeHandle} className={s.but}>Go back</button>
+            <form className={s.form}>
             <button type="submit" className={s.button} onClick={submitHandler}>
                 <span className={s.buttonLabel}>Search</span>
             </button>
@@ -41,11 +43,10 @@ export const MoviesPage = () => {
                 autoComplete="off"
                 autoFocus
                 placeholder="Search films" />
-        </form>
-            <button onClick={homeHandle}></button>
-            <ul >
+        </form>            
+            <ul className={s.list} >
                 {films&&films.map(({ id, title }) => {
-                    return (<li key={id} ><Link to={`/movie/${id}`}>{title}</Link></li>);
+                    return (<li key={id} className={s.link}><Link to={`/movie/${id}`}>{title}</Link></li>);
                 })}
             </ul></>
     )

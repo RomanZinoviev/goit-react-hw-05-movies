@@ -6,3 +6,12 @@
 .activLink{
     color: blue;
 }
+.navigate{
+    width: 100%;
+    height: 60px;
+    background-color:grey;
+    display: flex;
+    padding: 50px 50px;
+    text-align: center;
+    justify-content: center;
+}

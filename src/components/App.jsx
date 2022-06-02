@@ -7,7 +7,13 @@ import { NotFoundViue } from './NotFoundViue/NotFoundViue';
 
 export const App = () => {  
   return (
-    <div>
+    <div style={{       
+      fontSize: 16,
+      paddingLeft: 50,
+      paddingRight: 50,
+      paddingTop: 50,       
+      }}
+>
       <Routes>
         <Route path="/" element={<Navigation />}>
           <Route index element={<HomePage />} />

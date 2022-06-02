@@ -1,0 +1,15 @@
+a{
+    text-decoration: none;
+    color: blue;
+}
+li{
+   list-style: none;
+}
+.list{
+    font-size: 30px;  
+    color: black;  
+    padding-left: 70px;
+}
+.link{
+    margin-bottom: 20px;
+}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import s from "../Cast/Cast.module.css"
 
 export const Cast = () => {    
     const [cast, setCast] = useState(null);   
@@ -21,11 +22,11 @@ export const Cast = () => {
     }, [movieId]);
     if (cast) {
         return (
-            <ul>
+            <ul className={s.list}>
                 {cast.map(actor => (
-                <li key={actor.id}><h3>{actor.original_name}</h3>
-                    <p>{actor.character}</p>
-                    <img src={`${wayImage}${actor.profile_path}`} alt={actor.name} />
+                <li key={actor.id} className={s.link}><h3 className={s.title}>Actor name: {actor.original_name}</h3>
+                    <p className={s.text}>Role: {actor.character}</p>
+                    <img className={s.img} src={actor.profile_path?`${wayImage}${actor.profile_path}`:"https://ipbmafia.ru/uploads/monthly_2018_07/895242-200.png.e10304d04e80f56d3ebaa863b4ccdd41.png"} alt={actor.name} />
                 </li>
             ))}
             </ul>
