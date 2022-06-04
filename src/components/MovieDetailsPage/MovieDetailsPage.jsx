@@ -1,6 +1,6 @@
 import { useState, useEffect, lazy, Suspense } from "react";
 import axios from "axios";
-import { Link, useNavigate, Route, Routes, useParams } from "react-router-dom";
+import { Link, useNavigate, Route, Routes, useParams, useLocation } from "react-router-dom";
 // import { Cast } from '../Cast/Cast';
 // import { Reviews } from '../Reviews/Reviews';
 import s from "../MovieDetailsPage/MovieDetailsPage.module.css"
@@ -9,9 +9,9 @@ const Reviews = lazy(() => import("../Reviews/Reviews"))
 
 const MovieDetailsPage = () => {
     const [movieInfo, setMovieInfo] = useState(null);  
-    const navigate = useNavigate();
-    const {movieId} = useParams();
-    
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { movieId } = useParams();    
 
     const API_GET = "https://api.themoviedb.org/3/movie/";
     const API_KEY = "04e9412e8b51c89a88481cdeb7f8adec";   
@@ -19,7 +19,7 @@ const MovieDetailsPage = () => {
     
     const getFilmsById = (movieId) => {
         axios.get(`${API_GET}${movieId}?api_key=${API_KEY}`).then(res => {            
-            setMovieInfo(res.data);            
+          setMovieInfo(res.data);           
         }).catch(err => console.log(err))
     };
     useEffect(() => {
@@ -27,7 +27,7 @@ const MovieDetailsPage = () => {
         getFilmsById(movieId);
     }, [movieId]);
     const goBackHandle = () => {
-        navigate("/");
+        navigate(location.state);
     }
     if (movieInfo) {
         return (
@@ -41,10 +41,10 @@ const MovieDetailsPage = () => {
                 />                
             <ul>
               <li>
-                <Link to={`cast`} className={s.link}>Cast</Link>
+                <Link to={`cast`} state={location.state} className={s.link}>Cast</Link>
               </li>
               <li>
-                <Link to={`reviews`} className={s.link}>Reviews</Link>
+                <Link to={`reviews`} state={location.state} className={s.link}>Reviews</Link>
               </li>
             </ul>
             <Suspense fallback={<>Loading...</>}>
